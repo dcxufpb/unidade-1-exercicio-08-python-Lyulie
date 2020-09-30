@@ -2,6 +2,7 @@
 
 import cupom
 import pytest
+from cupom import Loja
 
 
 def verifica_campo_obrigatorio_objeto(mensagem_esperada, loja):
@@ -251,9 +252,9 @@ IE: 123456789"""
 
 
 def test_valida_observacao():
-    assert cupom.dados_loja_objeto(LOJA_OBSERVACAO_NULA)
+    assert cupom.dados_loja_objeto(LOJA_OBSERVACAO_NULA) \
     == TEXTO_ESPERADO_SEM_OBSERVACAO
-    assert cupom.dados_loja_objeto(LOJA_OBSERVACAO_VAZIA)
+    assert cupom.dados_loja_objeto(LOJA_OBSERVACAO_VAZIA) \
     == TEXTO_ESPERADO_SEM_OBSERVACAO
 
 
@@ -302,7 +303,7 @@ IE: 123456789'''
 
 
 def test_valida_numero_e_complemento():
-    assert cupom.dados_loja_objeto(LOJA_SEM_NUMERO_SEM_COMPLEMENTO)
+    assert cupom.dados_loja_objeto(LOJA_SEM_NUMERO_SEM_COMPLEMENTO) \
     == TEXTO_ESPERADO_SEM_NUMERO_SEM_COMPLEMENTO
 
 
@@ -322,30 +323,39 @@ IE: 123456789'''
 
 
 def test_valida_numero_complemento_e_bairro():
-    assert cupom.dados_loja_objeto(LOJA_SEM_NUMERO_SEM_COMPLEMENTO_SEM_BAIRRO)
+    assert cupom.dados_loja_objeto(LOJA_SEM_NUMERO_SEM_COMPLEMENTO_SEM_BAIRRO) \
     == TEXTO_ESPERADO_SEM_NUMERO_SEM_COMPLEMENTO_SEM_BAIRRO
+
+TEXTO_ESPERADO_TEST_EXERCICIO2_CUSTOMIZADO = \
+'''Aguas indaia
+Av Joana Silveira, 727 portal
+Bela Vista - Campina Grande - PB
+CEP:58038-000 Tel (83) 8888-7777
+Fonte sul
+CNPJ: 11.111.222/3333-44
+IE: 111.222.333.444'''
 
 
 def test_exercicio2_customizado():
 
     # Defina seus próprios valores para as variáveis a seguir
-    nome_loja = ""
-    logradouro = ""
-    numero = 0
-    complemento = ""
-    bairro = ""
-    municipio = ""
-    estado = ""
-    cep = ""
-    telefone = ""
-    observacao = ""
-    cnpj = ""
-    inscricao_estadual = ""
+    nome_loja = "Aguas indaia"
+    logradouro = "Av Joana Silveira"
+    numero = 727
+    complemento = "portal"
+    bairro = "Bela Vista"
+    municipio = "Campina Grande"
+    estado = "PB"
+    cep = "58038-000"
+    telefone = "(83) 8888-7777"
+    observacao = "Fonte sul"
+    cnpj = "11.111.222/3333-44"
+    inscricao_estadual = "111.222.333.444"
 
     lojaCustomizada = cupom.Loja(nome_loja, logradouro, numero, complemento,
                                  bairro, municipio, estado, cep, telefone,
                                  observacao, cnpj, inscricao_estadual)
 
     # E atualize o texto esperado abaixo
-    assert (cupom.dados_loja_objeto(lojaCustomizada) == """
-""")
+    assert (cupom.dados_loja_objeto(lojaCustomizada) == \
+    TEXTO_ESPERADO_TEST_EXERCICIO2_CUSTOMIZADO)
